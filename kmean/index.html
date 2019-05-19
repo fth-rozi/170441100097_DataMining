@@ -1,0 +1,555 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Pemebelajaran Tugas Data Mining">
+      
+      
+        <link rel="canonical" href="https://fth-rozi.github.io/170441100097-DataMining/kmean/">
+      
+      
+        <meta name="author" content="Fathur Rozi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>Metode CLUSTERING - Data Mining</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "None", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#k-mean" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://fth-rozi.github.io/170441100097-DataMining/" title="Data Mining" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Data Mining
+            </span>
+            <span class="md-header-nav__topic">
+              Metode CLUSTERING
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/fth-rozi/170441100097-DataMining" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Data Mining
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://fth-rozi.github.io/170441100097-DataMining/" title="Data Mining" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Data Mining
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/fth-rozi/170441100097-DataMining" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Data Mining
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Metode CLUSTERING
+      </label>
+    
+    <a href="./" title="Metode CLUSTERING" class="md-nav__link md-nav__link--active">
+      Metode CLUSTERING
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#k-mean" title="K-MEAN" class="md-nav__link">
+    K-MEAN
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../knn/" title="Metode kNN" class="md-nav__link">
+      Metode kNN
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../decision tree/" title="Metode Decision Tree" class="md-nav__link">
+      Metode Decision Tree
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#k-mean" title="K-MEAN" class="md-nav__link">
+    K-MEAN
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Metode CLUSTERING</h1>
+                
+                <h5 id="k-mean"><strong>K-MEAN</strong><a class="headerlink" href="#k-mean" title="Permanent link">&para;</a></h5>
+<p>K-means merupakan salah satu algoritma <em>clustering</em> . Tujuan algoritma ini yaitu untuk membagi data menjadi beberapa kelompok. Algoritma ini menerima masukan berupa data tanpa label kelas. Hal ini berbeda dengan <em>supervised learning</em> yang menerima masukan berupa vektor (­<em>x­1 , y1</em>) , (­<em>x­2 , y2</em>) , …, (­<em>x­i , yi</em>), di mana <em>xi</em> merupakan data dari suatu data pelatihan dan <em>yi</em> merupakan label kelas untuk <em>xi</em> .</p>
+<p>Pada algoritma pembelajaran ini, komputer mengelompokkan sendiri data-data yang menjadi masukannya tanpa mengetahui terlebih dulu target kelasnya. Pembelajaran ini termasuk dalam <em>unsupervised learning.</em> Masukan yang diterima adalah data atau objek dan <em>k</em> buah kelompok (<em>cluster</em>) yang diinginkan.  Algoritma ini akan mengelompokkan data atau objek ke dalam <em>k</em> buah kelompok tersebut. Pada setiap <em>cluster</em> terdapat titik pusat (<em>centroid</em>) yang merepresentasikan <em>cluster</em> tersebut.</p>
+<p><strong>Objective function</strong> yang berusaha diminimalkan oleh k-means adalah:</p>
+<p>J (U, V) = SUM (k=1 to N) SUM (i=1 to c) (a_ik * (x_k, v_i)^2)</p>
+<p>dimana:
+U : Matriks keanggotaan data ke masing-masing cluster yang berisikan nilai 0 dan 1
+V : Matriks centroid/rata-rata masing-masing cluster
+N : Jumlah data
+c : Jumlah cluster
+a_ik : Keanggotaan data ke-k ke cluster ke-i
+x_k : data ke-k
+v_i : Nilai centroid cluster ke-i</p>
+<p><strong>Prosedur</strong> yang digunakan dalam melakukan optimasi menggunakan k-means adalah sebagai berikut:
+Step 1. Tentukan jumlah cluster
+Step 2. Alokasikan data ke dalam cluster secara random
+Step 3. Hitung centroid/rata-rata dari data yang ada di masing-masing cluster.
+Step 4. Alokasikan masing-masing data ke centroid/rata-rata terdekat
+Step 5. Kembali ke Step 3, apabila masih ada data yang berpindah cluster atau apabila perubahan nilai centroid, ada yang di atas nilai threshold yang ditentukan atau apabila perubahan nilai pada objective function yang digunakan, di atas nilai threshold yang ditentukan</p>
+<p>Centroid/rata-rata dari data yang ada di masing-masing cluster yang dihitung pada Step 3. didapatkan menggunakan rumus sebagai berikut:</p>
+<p>v_ij = SUM (k=0 to N_i) (x_kj) / N_i</p>
+<p>dimana:
+i,k : indeks dari cluster
+j : indeks dari variabel
+v_ij : centroid/rata-rata cluster ke-i untuk variabel ke-j
+x_kj : nilai data ke-k yang ada di dalam cluster tersebut untuk variabel ke-j
+N_i : Jumlah data yang menjadi anggota cluster ke-i</p>
+<p>Sedangkan pengalokasian data ke masing-masing cluster yang dilakukan pada Step 4. dilakukan secara penuh, dimana nilai yang memungkinkan untuk a_ik adalah 0 atau 1. Nilai 1 untuk data yang dialokasikan ke cluster dan nilai 0 untuk data yang dialokasikan ke cluster yang lain. Dalam menentukan apakah suatu data teralokasikan ke suatu cluster atau tidak, dapat dilakukan dengan menghitung jarak data tersebut ke masing-masing centroid/rata-rata masing-masing cluster. Dalam hal ini, a_ik akan bernilai 1 untuk cluster yang centroidnya terdekat dengan data tersebut, dan bernilai 0 untuk yang lainnya.</p>
+<p><strong>dibawah adalah contoh program data cancer yang menggunakan metode K-Means</strong></p>
+<p><img alt="" src="../assets/images/1.PNG" /></p>
+<p>gambar diatas menunjukan bahwa kita harus meng import library seperti pandas untuk memuat file ke dalam data virtual ala spreadsheet dan numpy untuk operasi vektor dan matriks</p>
+<p><img alt="2" src="../assets/images/2.PNG" /></p>
+<p>gambar diatas berfungsi untuk mengambil data yang berada didalam file Downloads dengan nama file cancer.csv</p>
+<p><img alt="3" src="../assets/images/3.PNG" /></p>
+<p>gambar diatas menunjukan list data yang akan digunakan</p>
+<p><img alt="4" src="../assets/images/4.PNG" /></p>
+<p>menunjukan bahwa ada data yang berlabel B357, M212 dan nama: diagnosis dengan type:int64 </p>
+<p><img alt="5" src="../assets/images/5.PNG" /></p>
+<p>gambar diatas menunjukan pengidentifikasian label</p>
+<p><img alt="6" src="../assets/images/6.PNG" /></p>
+<p><img alt="7" src="../assets/images/7.PNG" /></p>
+<p><img alt="8" src="../assets/images/8.PNG" /></p>
+<p><img alt="9" src="../assets/images/9.PNG" /></p>
+<div class="codehilite"><pre><span></span>radius_mean dan fitur tekstur_mean akan digunakan untuk pengelompokan. Sebelum proses pengelompokan mari kita periksa bagaimana data kita terlihat
+</pre></div>
+
+<p><img alt="11" src="../assets/images/11.PNG" /></p>
+<p><img alt="12" src="../assets/images/12.PNG" /></p>
+<p>gambar diatas menunjukan bahawa Data diatas terlihat seperti plot tanpa label diagnosis</p>
+<p><img alt="13" src="../assets/images/13.PNG" /></p>
+<p><img alt="14" src="../assets/images/14.PNG" /></p>
+<ol>
+<li>Tentukan pusat K dan data kluster,</li>
+<li>Tetapkan centroid acak,
+   Poin data cluster berdasarkan jarak dari centroid (jarak euclidean),</li>
+<li>Ulangi langkah 3 hingga posisi centroid mulai tidak berubah.</li>
+</ol>
+<p><img alt="15" src="../assets/images/15.PNG" /></p>
+<div class="codehilite"><pre><span></span>Titik siku mulai dari 2
+</pre></div>
+
+<p><img alt="16" src="../assets/images/16.PNG" /></p>
+<p><img alt="17" src="../assets/images/17.PNG" /></p>
+<div class="codehilite"><pre><span></span>Plot data setelah k = 2 clustering
+</pre></div>
+
+<p><img alt="18" src="../assets/images/18.PNG" /></p>
+<p>Sentuhan data tengah dari clustered scatters</p>
+<p><img alt="19" src="../assets/images/19.PNG" /></p>
+<p><img alt="20" src="../assets/images/20.PNG" /></p>
+<p><img alt="21" src="../assets/images/21.PNG" /></p>
+<p><img alt="22" src="../assets/images/22.PNG" /></p>
+<p><img alt="23" src="../assets/images/23.PNG" /></p>
+<p>CLUSTERING HIERARCHICAL</p>
+<ol>
+<li>Setiap titik data ditransformasikan menjadi cluster,</li>
+<li>Buat cluster menggunakan 2 titik data terdekat,</li>
+<li>Buat kluster menggunakan 2 klaster terdekat</li>
+</ol>
+<p><img alt="24" src="../assets/images/24.PNG" /></p>
+<p><img alt="25" src="../assets/images/25.PNG" /></p>
+<p>Data setelah pengelompokan hierarkis</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="../knn/" title="Metode kNN" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Metode kNN
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2016 - 2019 fth-rozi
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="http://struct.cc" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/fth-rozi" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/squidfunk" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://instagram.com/in/fth.rozi" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8c0d971c.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
